@@ -1,0 +1,39 @@
+.cover-container {
+    background-image: url("/images/logo.png");
+    background-repeat: no-repeat;
+    background-position: 30% 50%;
+    background-size: contain;
+
+    
+}
+body {
+    height: 100vh;
+    margin: 0;
+    background-color: #212529;
+    
+}
+p, h1 {
+    color: white;
+}
+
+h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.lead {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcomeMessage {
+    right: 50%;
+}
+
+#typing-text {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+
+

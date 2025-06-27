@@ -1,0 +1,66 @@
+
+.main-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  gap: 20px;
+  border: outset;
+}
+
+/* Sidebars */
+.sidebar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  width: 20%;
+  padding: 15px;
+  border: outset;
+
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar li {
+  margin-bottom: 10px;
+}
+
+/* Center Content */
+.content {
+  flex: 1;
+  padding: 15px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: outset;
+}
+
+/* Blog form */
+textarea {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  margin-bottom: 10px;
+  resize: none;
+}
+
+button {
+  padding: 10px 20px;
+  list-style: none;
+}
+
+#blogPosts {
+  margin-top: 20px;
+  list-style: none;
+}
+.posts {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.blog-post {
+  border-top: 1px solid #ddd;
+  padding: 10px 0;
+}

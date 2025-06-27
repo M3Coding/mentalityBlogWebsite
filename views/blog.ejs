@@ -1,129 +1,81 @@
 <%- include("partials/header.ejs")%>
-<div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
-  <div class="carousel-indicators">
-    <button
-      type="button"
-      data-bs-target="#myCarousel"
-      data-bs-slide-to="0"
-      class="active"
-      aria-label="Slide 1"
-      aria-current="true"
-    ></button>
-    <button
-      type="button"
-      data-bs-target="#myCarousel"
-      data-bs-slide-to="1"
-      aria-label="Slide 2"
-      class=""
-    ></button>
-    <button
-      type="button"
-      data-bs-target="#myCarousel"
-      data-bs-slide-to="2"
-      aria-label="Slide 3"
-      class=""
-    ></button>
+<link rel="stylesheet" href="/styles/blogStyle.css" />
+<!-- Main Layout -->
+<div class="main-container">
+  <!-- Left Sidebar -->
+  <div class="sidebar left">
+    <ul>
+      <li><h3>Men's Mental Health Aides</h3></li>
+      <li>
+        <ul>
+        <li><strong>Toll-free Mental Health Support</strong></li>
+        <li>📱Suicide & Crisis Lifeline 988</li><hr>
+        <li>📱SAMHSA National Helpline 1.800.662.HELP (4357)</li><hr>
+        <li>📱National Suicide Prevention Lifeline 1.800.273.TALK (8255)</li><hr>
+        <li>📱Crisis Text Line Text "HOME" to 741-741</li><hr>
+        <li>📱Veterans Crisis Line Call 988, then press 1</li><hr>
+        <li>📱NAMI HelpLine 1.800.950.NAMI (6264)</li><hr>
+        </ul>
+      </li>
+      <li>
+        <ul>
+            <li><strong>Mental Website Links</strong></li>
+            <li>💻<a href="https://headsupguys.org/">HeadsUpGuys</a></li><hr>
+            <li>💻<a href="https://mantherapy.org/">Man Therapy</a></li><hr>
+            <li>💻<a href="https://us.movember.com/mens-health/mental-health">Movember-Mental Health</a></li><hr>
+            <li>💻<a href="https://menshealthnetwork.org/">Men's Health Network</a></li><hr>
+            <li>💻<a href="https://www.mhanational.org/men-and-mental-health">Mental Health America-For Men</a></li><hr>
+            <li>💻<a href="https://therapyforblackmen.org/">Therapy for Black Men</a></li><hr>
+            <li>💻<a href="https://jedfoundation.org/mental-health-of-men/">The Jed Foundation-Mental Health for Men</a></li><hr>
+            <li>💻<a href="https://www.nami.org/Your-Journey/Identity-and-Cultural-Dimensions/Men">National Alliance on Mental Illness(Nami)</a></li><hr>
+        </ul>
+      </li>
+    </ul>
   </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <svg
-        aria-hidden="true"
-        class="bd-placeholder-img"
-        height="100%"
-        preserveAspectRatio="xMidYMid slice"
-        width="100%"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <rect
-          width="100%"
-          height="100%"
-          fill="var(--bs-secondary-color)"
-        ></rect>
-      </svg>
-      <div class="container">
-        <div class="carousel-caption text-start">
-          <h1>Example headline.</h1>
-          <p class="opacity-75">
-            Some representative placeholder content for the first slide of the
-            carousel.
-          </p>
-          <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
-        </div>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <svg
-        aria-hidden="true"
-        class="bd-placeholder-img"
-        height="100%"
-        preserveAspectRatio="xMidYMid slice"
-        width="100%"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <rect
-          width="100%"
-          height="100%"
-          fill="var(--bs-secondary-color)"
-        ></rect>
-      </svg>
-      <div class="container">
-        <div class="carousel-caption">
-          <h1>Another example headline.</h1>
-          <p>
-            Some representative placeholder content for the second slide of the
-            carousel.
-          </p>
-          <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
-        </div>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <svg
-        aria-hidden="true"
-        class="bd-placeholder-img"
-        height="100%"
-        preserveAspectRatio="xMidYMid slice"
-        width="100%"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <rect
-          width="100%"
-          height="100%"
-          fill="var(--bs-secondary-color)"
-        ></rect>
-      </svg>
-      <div class="container">
-        <div class="carousel-caption text-end">
-          <h1>One more for good measure.</h1>
-          <p>
-            Some representative placeholder content for the third slide of this
-            carousel.
-          </p>
-          <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
-        </div>
-      </div>
-    </div>
+
+  <!-- Main Content -->
+  <div class="content">
+    <form id="blogForm" action="/submit" method="POST">
+      <textarea id="blogInput" placeholder="What's up?" name="userPost"></textarea>
+      <button class="postSubmit" type="submit" value="Submit">Let's See It!👀</button>
+    </form>
+    
+    <div id="blogPosts" class="recentPosts">
+    
+        <% if (message && message.length > 0) {%>
+        <% message.forEach(function(msg) {%> 
+        <p class="posts"><%= msg %></p>
+        <%});%>
+        <%}%>
+    
+    <!--recent posts passed through here.-->
+  </div> 
+
   </div>
-  <button
-    class="carousel-control-prev"
-    type="button"
-    data-bs-target="#myCarousel"
-    data-bs-slide="prev"
-  >
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button
-    class="carousel-control-next"
-    type="button"
-    data-bs-target="#myCarousel"
-    data-bs-slide="next"
-  >
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
+
+  <!-- Right Sidebar -->
+  <div class="sidebar right">
+    <ul>
+      <li>
+        <h3>Mental Health Tips</h3>
+      </li>
+      <li><p>✅ It's Okay to Talk!</p></li><hr>
+      <li><p>✅ Recognize Stress Signals!</p></li><hr>
+      <li><p>✅ Prioritize Mental Health!</p></li><hr>
+      <li><p>✅ Make Time for Purpose! </p></li><hr>
+      <li><p>✅ Connect with Other Men!</p></li><hr>
+      <li><p>✅ Challenge the "Be Tough" Myth!</p></li><hr>
+      <li><p>✅ Establish Boundaries!</p></li><hr>
+      <li><p>✅ Limit Numbing Behaviors!</p></li><hr>
+      <li><p>✅ Seek Professional Help Early!</p></li><hr>
+      <li><p>✅ Practice Faith and Prayer!</p></li><hr>
+      <li><iframe width="250" height="250" src="https://www.youtube.com/embed/3KfZ30O2fEQ?si=Q8K4kuP42VQfHJi2&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></li>
+      <li><img src="images/menmentalhealth1.jpg" alt=""></li>
+    </ul>
+  </div>
+  
 </div>
-</body>
+
 <script
   src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"

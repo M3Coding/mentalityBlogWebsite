@@ -3,7 +3,7 @@ import bodyParser from "body-parser";
 
 const app = express();
 const port =3000;
-
+let message = [];
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -12,8 +12,14 @@ app.get("/", (req, res) => {
     res.render("index.ejs");
 });
 app.get("/blog", (req, res) => {
-    res.render("blog.ejs");
+    
+    res.render("blog.ejs", {message: message});
 });
+app.post("/submit", (req, res) =>{
+    const userInput= message.push(req.body.userPost)
+    
+    res.redirect("/blog");
+})
 app.get("/about", (req, res) => {
     res.render("about.ejs");
 });

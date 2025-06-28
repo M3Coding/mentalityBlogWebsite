@@ -2,40 +2,65 @@
 .main-container {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
   padding: 20px;
   gap: 20px;
-  border: outset;
+  
+}
+
+
+.content > h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #1C3D56;
+  
+}
+h3 {
+    color: #1C3D56;
+    
 }
 
 /* Sidebars */
 .sidebar {
     display: flex;
-    align-items: center;
-    justify-content: center;
-  width: 20%;
+  width: 25%;
   padding: 15px;
-  border: outset;
+  
+  text-align: left;
+  color: #000;
+  position: sticky;
+  top: 0;
+  
 
 }
 
 .sidebar ul {
+    margin: 0;
+    padding: 0;
   list-style: none;
 }
 
 .sidebar li {
   margin-bottom: 10px;
 }
+.sidebar a {
+    color: #1C3D56;
+} 
 
 /* Center Content */
 .content {
   flex: 1;
   padding: 15px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border: outset;
+  
+  
 }
 
 /* Blog form */
+small {
+    display: block;
+    text-align: center;
+}
 textarea {
   width: 100%;
   height: 100px;
@@ -44,9 +69,23 @@ textarea {
   resize: none;
 }
 
+
 button {
   padding: 10px 20px;
   list-style: none;
+}
+.postSubmit {
+    display: inline;
+    padding: 0;
+    border: 0;
+    margin-left: 2%;
+    font: inherit;
+    font-weight: bold;
+    color: #1C3D56;
+    cursor: pointer;
+    background: transparent;
+    color: currentColor;
+    -webkit-appearance: none;
 }
 
 #blogPosts {
@@ -63,4 +102,44 @@ button {
 .blog-post {
   border-top: 1px solid #ddd;
   padding: 10px 0;
+}
+
+.edit-btn {
+    display: inline;
+    padding: 0;
+    border: 0;
+    margin-left: 2%;
+    font: inherit;
+    cursor: pointer;
+    background: transparent;
+    color: currentColor;
+    -webkit-appearance: none;
+}
+
+
+.delete-btn {
+    
+    display: inline;
+    padding: 0;
+    padding-left: 20px;
+    border: 0;
+    font: inherit;
+    cursor: pointer;
+    background: transparent;
+    color: currentColor;
+    -webkit-appearance: none;
+}
+
+
+.update-btn {
+    
+    display: inline;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    cursor: pointer;
+    background: transparent;
+    color: currentColor;
+    -webkit-appearance: none;
+
 }

@@ -1,5 +1,6 @@
 <%- include("partials/header.ejs")%>
 <link rel="stylesheet" href="/styles/blogStyle.css" />
+
 <!-- Main Layout -->
 <div class="main-container">
   <!-- Left Sidebar -->
@@ -20,14 +21,14 @@
       <li>
         <ul>
             <li><strong>Mental Website Links</strong></li>
-            <li>💻<a href="https://headsupguys.org/">HeadsUpGuys</a></li><hr>
-            <li>💻<a href="https://mantherapy.org/">Man Therapy</a></li><hr>
-            <li>💻<a href="https://us.movember.com/mens-health/mental-health">Movember-Mental Health</a></li><hr>
-            <li>💻<a href="https://menshealthnetwork.org/">Men's Health Network</a></li><hr>
-            <li>💻<a href="https://www.mhanational.org/men-and-mental-health">Mental Health America-For Men</a></li><hr>
-            <li>💻<a href="https://therapyforblackmen.org/">Therapy for Black Men</a></li><hr>
-            <li>💻<a href="https://jedfoundation.org/mental-health-of-men/">The Jed Foundation-Mental Health for Men</a></li><hr>
-            <li>💻<a href="https://www.nami.org/Your-Journey/Identity-and-Cultural-Dimensions/Men">National Alliance on Mental Illness(Nami)</a></li><hr>
+            <li><p>💻<a href="https://headsupguys.org/">HeadsUpGuys</a></p></li><hr>
+            <li><p>💻<a href="https://mantherapy.org/">Man Therapy</a></p></li><hr>
+            <li><p>💻<a href="https://us.movember.com/mens-health/mental-health">Movember-Mental Health</a></p></li><hr>
+            <li><p>💻<a href="https://menshealthnetwork.org/">Men's Health Network</a></p></li><hr>
+            <li><p>💻<a href="https://www.mhanational.org/men-and-mental-health">Mental Health America-For Men</a></p></li><hr>
+            <li><p>💻<a href="https://therapyforblackmen.org/">Therapy for Black Men</a></li></p><hr>
+            <li><p>💻<a href="https://jedfoundation.org/mental-health-of-men/">The Jed Foundation-Mental Health for Men</a></p></li><hr>
+            <li><p>💻<a href="https://www.nami.org/Your-Journey/Identity-and-Cultural-Dimensions/Men">National Alliance on Mental Illness(Nami)</a></p></li><hr>
         </ul>
       </li>
     </ul>
@@ -35,19 +36,30 @@
 
   <!-- Main Content -->
   <div class="content">
+    <h1>Let's Hear It 👂🏽</h1>
+    <p><small style="color: #4F4F4F ;">*Talk Yo' Stuff! Release Yourself! Drop🎤 and Walk Away!*</small></p>
     <form id="blogForm" action="/submit" method="POST">
+        <input type="text" class="blog-title" id="blog-title" name="blog-title" placeholder="Blog Title">
+        <input type="text" class="userName" id="userName" name="userName" placeholder="Enter your name!">
       <textarea id="blogInput" placeholder="What's up?" name="userPost"></textarea>
-      <button class="postSubmit" type="submit" value="Submit">Let's See It!👀</button>
+      <button class="postSubmit" type="submit" value="Submit">👉🏽Mic Drop🎤👈🏽</button>
+      
     </form>
     
     <div id="blogPosts" class="recentPosts">
     
-        <% if (message && message.length > 0) {%>
-        <% message.forEach(function(msg) {%> 
-        <p class="posts"><%= msg %></p>
-        <%});%>
-        <%}%>
+        <% if (posts && posts.length > 0) {%>
+        <% posts.forEach(function(post) {%> 
+            <div class="post" data-id="<%= post.id %>" >
     
+                <p class="content" ><%= post.content %><br><%=post.today%></p>
+                <textarea  class="edit-box"  style="display:none;"></textarea>
+                <button class="edit-btn" type="button">📝</button>
+                <button class="delete-btn" type="" value="delete">❌</button>
+                <button class="update-btn" type="submit"value="update-btn" name="update-btn" style="display: none;">Update</button>
+            </div>
+            <%});%>
+            <%}%>
     <!--recent posts passed through here.-->
   </div> 
 
@@ -76,9 +88,54 @@
   
 </div>
 
-<script
-  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
-  crossorigin="anonymous"
-></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".edit-btn").forEach(button => {
+      button.addEventListener("click", function () {
+        const postDiv = this.parentElement;
+        const contentEl = postDiv.querySelector(".content");
+        const editBox = postDiv.querySelector(".edit-box");
+        const updateBtn = postDiv.querySelector(".update-btn");
+
+        // ✅ Fill textarea with the current post content
+        editBox.value = contentEl.textContent;
+
+        // ✅ Show the textarea and Save button
+        editBox.style.display = "block";
+        this.style.display = "none";
+        updateBtn.style.display = "inline-block";
+      });
+    });
+
+    document.querySelectorAll(".update-btn").forEach(button => {
+      button.addEventListener("click", function () {
+        const postDiv = this.parentElement;
+        const editBox = postDiv.querySelector(".edit-box");
+        const contentEl = postDiv.querySelector(".content");
+        const postId = postDiv.dataset.id;
+
+        const updatedContent = editBox.value;
+
+        fetch("/update", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id: postId, content: updatedContent })
+        })
+        .then(res => res.text())
+        .then(message => {
+          // ✅ Update the visible post content
+          contentEl.textContent = updatedContent;
+
+          // Hide the textarea and Save button, show Edit button again
+          editBox.style.display = "none";
+          this.style.display = "none";
+          postDiv.querySelector(".edit-btn").style.display = "inline-block";
+        })
+        .catch(() => {
+          alert("Error updating post.");
+        });
+      });
+    });
+  });
+  </script>
 <%- include("partials/footer.ejs")%>

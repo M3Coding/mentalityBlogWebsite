@@ -7,7 +7,32 @@
   gap: 20px;
   
 }
+input {
+  padding: 10px;
+  border: lightgray solid 2px;
+  border-right: none;
+  border-left: none;
+  border-radius: 15px;
 
+}
+textarea {
+  border: lightgrey solid 2px;
+  border-right: none;
+  border-left: none;
+  border-radius: 15px;
+
+}
+input {
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
+
+.content hr {
+  border: gray;
+  border-radius: 15px;
+  border-style: inset;
+  border-width: 3px;
+}
 
 .content > h1 {
     display: flex;
@@ -23,18 +48,31 @@ h3 {
 
 /* Sidebars */
 .sidebar {
-    display: flex;
+  display: flex;
   width: 25%;
   padding: 15px;
-  
   text-align: left;
   color: #000;
   position: sticky;
   top: 0;
-  
+}
+.right {
+
+  border-left-width: 3px;
+  border-bottom-left-radius: 15px;
+  border-top-left-radius: 15px;
+  border-left-style: inset;
 
 }
 
+.left {
+  border-right: gray;
+  border-right-width: 3px;
+  border-bottom-right-radius: 15px;
+  border-top-right-radius: 15px;
+  border-right-style: inset;
+
+}
 .sidebar ul {
     margin: 0;
     padding: 0;

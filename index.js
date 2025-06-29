@@ -38,6 +38,16 @@ app.post("/update", (req, res) => {
   }
   res.sendStatus(200);
 });
+app.delete("/update", (req, res) => {
+    const {id} = req.body;
+  const index = posts.findIndex(p => p.id == id);
+
+  if (index !== -1) {
+    posts.splice(index, 1)
+  }
+  res.sendStatus(200);
+    
+})//this delete block of code req the id of the post. The array is indexed to find that id and if it matches the number then it deletes with the splice function. 
 app.get("/about", (req, res) => {
     res.render("about.ejs");
 });

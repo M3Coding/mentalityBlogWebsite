@@ -43,6 +43,7 @@
         <input type="text" class="userName" id="userName" name="userName" placeholder="Enter your name!">
       <textarea id="blogInput" placeholder="What's up?" name="userPost"></textarea>
       <button class="postSubmit" type="submit" value="Submit">👉🏽Mic Drop🎤👈🏽</button>
+      <hr>
       
     </form>
     
@@ -58,7 +59,7 @@
                 <textarea  class="edit-box"  style="display:none;"></textarea>
                 <button class="edit-btn" type="button">📝</button>
                 <button class="delete-btn" type="" value="delete">❌</button>
-                <button class="update-btn" type="submit"value="update-btn" name="update-btn" style="display: none;">Update</button>
+                <button class="update-btn" type="submit"value="update-btn" name="update-btn" style="display: none;">✅</button>
                 <hr>
             </div>
             <%});%>
@@ -93,12 +94,14 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
+  //open the edit box to type in the new content
     document.querySelectorAll(".edit-btn").forEach(button => {
       button.addEventListener("click", function () {
         const postDiv = this.parentElement;
         const contentEl = postDiv.querySelector(".content");
         const editBox = postDiv.querySelector(".edit-box");
         const updateBtn = postDiv.querySelector(".update-btn");
+        const deletebtn = postDiv.querySelector(".delete-btn")
 
         // ✅ Fill textarea with the current post content
         editBox.value = contentEl.textContent;
@@ -107,14 +110,16 @@ document.addEventListener("DOMContentLoaded", function () {
         editBox.style.display = "block";
         this.style.display = "none";
         updateBtn.style.display = "inline-block";
+        deletebtn.style.display = "none";
       });
     });
-
+    //updates the old content to the new content.
     document.querySelectorAll(".update-btn").forEach(button => {
       button.addEventListener("click", function () {
         const postDiv = this.parentElement;
         const editBox = postDiv.querySelector(".edit-box");
         const contentEl = postDiv.querySelector(".content");
+        const deletebtn = postDiv.querySelector(".delete-btn")
         const postId = postDiv.dataset.id;
 
         const updatedContent = editBox.value;
@@ -133,12 +138,46 @@ document.addEventListener("DOMContentLoaded", function () {
           editBox.style.display = "none";
           this.style.display = "none";
           postDiv.querySelector(".edit-btn").style.display = "inline-block";
+          deletebtn.style.display = "inline-block";
         })
         .catch(() => {
           alert("Error updating post.");
         });
       });
     });
+
+    //Delete btn js that connects to the server and deletes the post on client side and server side. 
+    document.querySelectorAll(".delete-btn").forEach(button => {
+      button.addEventListener("click", function () {
+        const postDiv = this.parentElement;
+        const editBox = postDiv.querySelector(".edit-box");
+        const contentEl = postDiv.querySelector(".content");
+        const postId = postDiv.dataset.id;
+        
+        fetch('/update', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: postId })
+      })
+      .then(response => {
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  
+  return response.text(); 
+})
+.then(data => {
+  postDiv.remove();
+  console.log('Delete successful:', data);
+})
+.catch(error => {
+  console.error('Error during DELETE request:', error);
+});
+      
+
+
+      })
+    })
   });
   </script>
 <%- include("partials/footer.ejs")%>

@@ -37,9 +37,9 @@
   <!-- Main Content -->
   <div class="content">
     <h1>Let's Hear It 👂🏽</h1>
-    <p><small style="color: #4F4F4F ;">*Talk Yo' Stuff! Release Yourself! Drop🎤 and Walk Away!*</small></p>
+    <p class="instruction"><small style="color: #4F4F4F ;">*Talk Yo' Stuff! Release Yourself! Drop🎤 and Walk Away!*</small></p>
     <form id="blogForm" action="/submit" method="POST">
-        <input type="text" class="blog-title" id="blog-title" name="blog-title" placeholder="Blog Title">
+        <input type="text" class="blogTitle" id="blogTitle" name="blogTitle" placeholder="Blog Title">
         <input type="text" class="userName" id="userName" name="userName" placeholder="Enter your name!">
       <textarea id="blogInput" placeholder="What's up?" name="userPost"></textarea>
       <button class="postSubmit" type="submit" value="Submit">👉🏽Mic Drop🎤👈🏽</button>
@@ -51,12 +51,15 @@
         <% if (posts && posts.length > 0) {%>
         <% posts.forEach(function(post) {%> 
             <div class="post" data-id="<%= post.id %>" >
+              <h3><%=post.blogTitle%></h3>
     
-                <p class="content" ><%= post.content %><br><%=post.today%></p>
+                <p class="content" ><%= post.content %></p>
+                <p>Posted by: <%= post.userName %></p><p><%= post.today %></p>
                 <textarea  class="edit-box"  style="display:none;"></textarea>
                 <button class="edit-btn" type="button">📝</button>
                 <button class="delete-btn" type="" value="delete">❌</button>
                 <button class="update-btn" type="submit"value="update-btn" name="update-btn" style="display: none;">Update</button>
+                <hr>
             </div>
             <%});%>
             <%}%>

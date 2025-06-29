@@ -21,7 +21,9 @@ app.post("/submit", (req, res) =>{
     const newPost= {
         id: Date.now(),
         content: req.body.userPost,
-        today: today
+        today: today,
+        blogTitle: req.body.blogTitle,
+        userName:req.body.userName
 
         };
         posts.push(newPost);
